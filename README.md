@@ -1,8 +1,8 @@
 DynamicView
 ===========
 
-一个支持动态解析XML布局的库，通过这个库，可以动态渲染类似下面的布局, DynamicView会缓存视图结构，不会重复解析XML。<br>
-根节点SN属性是必须要设置的，不同的布局要保证不同，视图结构的缓存以此属性为Key。
+A library that supports dynamic parsing of XML layouts. With this library, you can dynamically render a layout similar to the following. DynamicView caches the view structure without repeatedly parsing the XML. <br>
+The root node SN attribute must be set. Different layouts must be different. The view structure cache is based on this attribute.
 
 ```xml
 <RBox sn='000001'>
@@ -22,11 +22,11 @@ DynamicView
 </RBox>
 ```
 
-## 组件说明
+## Component Description
 
-### 节点说明
+### Node Description
 
-节点的名称是我们需要自定义控件的类名，属性是定义的类的setter，例如Text会有如下定义
+The name of the node is the class name of the custom control we need, the property is the setter of the defined class, for example, Text will have the following definition.
 
 ```java
 @DynamicView
@@ -64,73 +64,73 @@ public class Text extends TextView implements ViewType.View {
     }
 }
 ```
-DynamicView注解是为了表示这个类是节点控件，编译期会自动生成对应的帮助类
+The DynamicView annotation is to indicate that this class is a node control, and the corresponding helper class is automatically generated at compile time.
 
-ViewType有三种
-* View - 表示此节点为View，不能包含子节点
-* GroupView - 表示此节点为容器，可包含子节点，参照LinearLayout、RelativeLayout等
-* AdapterView - 此节点只能有一个子节点，根据数据来决定生成多少子view，参照ListView、RecyclerView等
+There are three types of ViewType
+* View - indicates that this node is a View and cannot contain child nodes
+* GroupView - indicates that this node is a container, can contain child nodes, refer to LinearLayout, RelativeLayout, etc.
+* AdapterView - This node can only have one child node. According to the data, how many child views are generated, refer to ListView, RecyclerView, etc.
 
-属性值有两种形态
-* 字面值 title="Hello World"，这种属性会直接通过setter设置给控件
-* 动态属性 logo="{logo}" logo会绑定到一个Map或者是JSONObject的key为logo的值
+Property values have two forms
+* Literal value title="Hello World", this property will be set directly to the control via setter
+* Dynamic attribute logo="{logo}" logo will be bound to a Map or JSONObject key is the value of the logo
 
-### 内置节点
+### Built-in node
 
-* HBox 横向布局容器，LinearLayout Orientation为Horizontal
-* VBox 纵向布局容器，LinearLayout Orientation为Vertical
-* RBox 相对布局容器，使用RelativeLayout实现
-* Grid Adapter布局容器，使用RecyclerView实现
-* Text 文本控件
-* Image 图片控件
-### 属性说明
+* HBox horizontal layout container, LinearLayout Orientation is Horizontal
+* VBox vertical layout container, LinearLayout Orientation is Vertical
+* RBox relative layout container, using RelativeLayout
+* Grid Adapter layout container, using RecyclerView
+* Text text control
+* Image Picture Control
+### Attribute Description
 
-通用属性
+General property
 <table>
-<tr><th>名称</th><th>格式(N表示数值，S表示字符串)</th><th>说明(除非特别说明，N的单位都是dp)</th></tr>
-<tr><td>name</td><td>S</td><td>控件标识</td></tr>
-<tr><td>size</td><td nowrap>match|wrap|N [match|wrap|N]</td><td>设置width和height， 如果只有一个，则width，height相同</td></tr>
-<tr><td>margin</td><td> N [N] [N] [N] </td><td> 左上右下，一个时全部相同，两个时左右，上下</td></tr>
-<tr><td>padding</td><td> N [N] [N] [N] </td><td> 同上</td></tr>
-<tr><td>background</td><td> N(color) [N] [N] [N] [N] </td><td> 第一个为背景颜色，后面四个为圆角半径，左上，右上，右下，左下</td></tr>
-<tr><td>gravity</td><td>center | left | right | top | bottom</td><td>单个或者组合，使用|分隔</td></tr>
-<tr><td>weight</td><td>N</td><td>只有放在HBox和VBox中的控件设置才会有效果</td></tr>
-<tr><td>leftOf</td><td>@S</td><td>S为通过name设置的控件标识, 只有放在RBox中的控件设置才会有效果</td></tr>
-<tr><td>rightOf</td><td>@S</td><td>同上</td></tr>
-<tr><td>above</td><td>@S</td><td>同上</td></tr>
-<tr><td>below</td><td>@S</td><td>同上</td></tr>
-<tr><td>alignLeft</td><td>@S</td><td>同上</td></tr>
-<tr><td>alignRight</td><td>@S</td><td>同上</td></tr>
-<tr><td>alignTop</td><td>@S</td><td>同上</td></tr>
-<tr><td>alignBottom</td><td>@S</td><td>同上</td></tr>
-<tr><td>alignBaseline</td><td>@S</td><td>同上</td></tr>
-<tr><td>align</td><td>center | left | right | top | bottom</td><td>单个或者组合，使用\|分隔，<font color=#A52A2A>容器类和Text具有此属性，控制子元素的对齐方式</td></tr>
+<tr><th>Name</th><th> format (N for numeric values, S for string)</th><th> Description (unless otherwise stated, the unit of N is dp)</th>< /tr>
+<tr><td>name</td><td>S</td><td>Control ID</td></tr>
+<tr><td>size</td><td nowrap>match|wrap|N [match|wrap|N]</td><td>Set width and height, if there is only one, then width and height are the same </ Td></tr>
+<tr><td>margin</td><td> N [N] [N] [N] </td><td> Top left and bottom right, one time all the same, two hours left and right, up and down</td> </tr>
+<tr><td>padding</td><td> N [N] [N] [N] </td><td> Same as above</td></tr>
+<tr><td>background</td><td> N(color) [N] [N] [N] [N] </td><td> The first is the background color and the last four are the rounded corners Radius, top left, top right, bottom right, bottom left</td></tr>
+<tr><td>gravity</td><td>center | left | right | top | bottom</td><td> single or combined, separated by |</td></tr>
+<tr><td>weight</td><td>N</td><td>Only the control settings placed in HBox and VBox will have an effect</td></tr>
+<tr><td>leftOf</td><td>@S</td><td>S is the control identifier set by name, only the control settings placed in RBox will have effect</td></ Tr>
+<tr><td>rightOf</td><td>@S</td><td>ibid</td></tr>
+<tr><td>above</td><td>@S</td><td>ibid</td></tr>
+<tr><td>below</td><td>@S</td><td>ibid</td></tr>
+<tr><td>alignLeft</td><td>@S</td><td>ibid</td></tr>
+<tr><td>alignRight</td><td>@S</td><td>ibid</td></tr>
+<tr><td>alignTop</td><td>@S</td><td>ibid</td></tr>
+<tr><td>alignBottom</td><td>@S</td><td>ibid</td></tr>
+<tr><td>alignBaseline</td><td>@S</td><td>ibid</td></tr>
+<tr><td>align</td><td>center | left | right | top | bottom</td><td> single or combination, separated by \|, <font color=#A52A2A> container class and Text Has this property, which controls the alignment of child elements</td></tr>
 </table>
 
  Text
 <table>
-<tr><th>名称 </th><th> 格式(N表示数值，S表示字符串) </th><th> 说明 </th></tr>
-<tr><td>text</td><td> S </td><td>文本内容</td></tr>
-<tr><td>fontSize</td><td> N </td><td>字体大小，单位为sp</td></tr>
-<tr><td>color</td><td> N(color) </td><td> 字体颜色</td></tr>
-<tr><td>style</td><td> bold | italic</td><td> 设置粗体或者斜体</td></tr>
+<tr><th>Name </th><th> Format (N for numeric values, S for strings) </th><th> Description </th></tr>
+<tr><td>text</td><td> S </td><td>Text Content</td></tr>
+<tr><td>fontSize</td><td> N </td><td>font size in sp</td></tr>
+<tr><td>color</td><td> N(color) </td><td> font color</td></tr>
+<tr><td>style</td><td> bold | italic</td><td> Set bold or italic</td></tr>
 </table>
 
  Image
 <table>
-<tr><th>名称 </th><th>  格式(N表示数值，S表示字符串) </th><th>  说明 </th></tr>
-<tr><td>src</td><td>res://xxxx | url | path </td><td> 资源名称，URL，本地路径</td></tr>
-<tr><td>scale</td><td>stretch | fitStart | fitEnd | fitCenter | center | centerCrop | centerInside </td><td>设置缩放类型</td></tr>
+<tr><th>Name </th><th> Format (N for numeric values, S for strings) </th><th> Description </th></tr>
+<tr><td>src</td><td>res://xxxx | url | path </td><td> resource name, URL, local path</td></tr>
+<tr><td>scale</td><td>stretch | fitStart | fitEnd | fitCenter | center | centerCrop | centerInside </td><td>Set the zoom type</td></tr>
 </table>
 
- Grid
+Grid
 <table>
-<tr><th>名称 </th><th> 格式(N表示数值，S表示字符串) </th><th> 说明 </th></tr>
-<tr><td>dataSource</td><td> S(JSONArray) </td><td> 内容数组</td></tr>
-<tr><td>spanCount</td><td> N </td><td> 列数量</td></tr>
+<tr><th>Name </th><th> Format (N for numeric values, S for strings) </th><th> Description </th></tr>
+<tr><td>dataSource</td><td> S(JSONArray) </td><td> Content Array</td></tr>
+<tr><td>spanCount</td><td> N </td><td> number of columns</td></tr>
 </table>
 
-### Grid节点
+### Grid Node
 
 ```xml
 <Grid spanCount='2' dataSource='{items}'>
@@ -139,36 +139,36 @@ ViewType有三种
     </VBox>
 </Grid>
 ```
-Grid节点只能有一个子节点，此节点可以理解成子控件的模版，Grid会根据items数组的数量，动态生成对应的子View。items数组中的每个值都是一个JSONObject，子节点中的动态属性绑定到这个JSONObject上
+The Grid node can only have one child node. This node can be understood as a template of the child control. The Grid dynamically generates the corresponding child View according to the number of items array. Each value in the items array is a JSONObject, and the dynamic properties in the child nodes are bound to this JSONObject.
 
-### 事件处理
+### Event processing
 
 ```java
-// 事件处理器
-public interface ActionProcessor {
-    /**
-    * view 事件产生视图
-    * tag  事件标记
-    * data 附加参数    
-    */
-    void processAction(View view, String tag, Object... data);
+// event handler
+Public interface ActionProcessor {
+     /**
+     * view event produces a view
+     * tag event tag
+     * data additional parameters
+     */
+     Void processAction(View view, String tag, Object... data);
 }
 ```
 
-事件属性的格式为 (tag) 或者 ({value})，后者会使用绑定数据中key为value的值作为tag
+The format of the event attribute is (tag) or ({value}), which uses the value of the key in the bound data as the value as the tag.
 ```xml
 <Text text='{value}' onClick='(VALUE_CLICK)' color='black'/>
 <Text text='{value}' onClick='({VALUE_CLICK})' color='black'/>
 ```
 
-通用事件
+General event
 <table>
-<tr><th>名称 </th><th> 说明 </th></tr>
-<tr><td>onClick</td><td>控件点击事件</td></tr>
+<tr><th>Name </th><th> Description </th></tr>
+<tr><td>onClick</td><td>Control click event</td></tr>
 </table>
 
 
-### 使用方法
+### Instructions
 
 ```gradle
 compile 'com.benny.library:dynamicview:0.0.3'
@@ -176,16 +176,16 @@ annotationProcessor 'com.benny.library:dynamicview-compiler:0.0.3'
 ```
 ```java
 
-// 创建View，第一个参数是Context，第二个是包含xml的字符串
+/ / Create a View, the first parameter is Context, the second is a string containing xml
 View convertView = DynamicViewEngine.getInstance().inflate(context, parent, layoutXml);
-// 注册事件处理器
+// Register event handler
 DynamicViewEngine.setActionProcessor(convertView, new ActionProcessor() {
-    @Override
-    public void processAction(View view, String tag, Object... data) {
-        //xxxxx
-    }
+     @Override
+     Public void processAction(View view, String tag, Object... data) {
+         //xxxxx
+     }
 });
-// 绑定动态属性，第一个参数是通过上面方法创建的view，第二个值是数据，Map<String, String> 或者 JSONObject
+// Bind dynamic property, the first parameter is the view created by the above method, the second value is data, Map<String, String> or JSONObject
 DynamicViewEngine.getInstance().bindView(convertView, data);
 
 ```
