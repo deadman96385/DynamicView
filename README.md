@@ -8,10 +8,10 @@ The root node SN attribute must be set. Different layouts must be different. The
 <RBox sn='000001'>
     <VBox background='#80E0E0E0 20 20 0 0' padding='18 18 18 10' margin='14'>
         <Text text='{title}' fontSize='20' color='black'/>
-        <Text text='金额' margin='0 10 0 0'/>
+        <Text text='Amount' margin='0 10 0 0'/>
         <RBox>
             <Text name='money' text='{money}' fontSize='28' color='black'/>
-            <Text rightOf='@money' alignBaseline='@money' text='元'/>
+            <Text rightOf='@money' alignBaseline='@money' text='yuan'/>
         </RBox>
         <Grid spanCount='2' dataSource='{items}'>
             <VBox margin='0 10 0 0'><Text text='{name}'/>
